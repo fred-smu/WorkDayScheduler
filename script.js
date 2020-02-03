@@ -10,23 +10,18 @@ var timeRowsElement = "6am";
 var futureYes = false;
 /*repopulats the events on a refresh*/
 if (myJsonString.length>0){
-    // console.log(myJsonString.length);
-    /*resets arry to empty*/
-    eventSave.length = 0;
-    /*repopulats arry fron JSON if it has any elements*/
-    eventSave =JSON.parse(myJsonString);
+     eventSave.length = 0;
     var element = "6am";
     var extElement = "." + element;
-    /*for loop sets events to past future and present*/
+    var arryString ;
     for (let index = 0; index < timeRows.length; index++) {
         element = timeRows[index];
         extElement = "." + element;
-        $(extElement).text(eventSave[index]) ;   
-        // console.log(eventSave[index]);
-    
-    };
-}
-
+        var repopstring;
+        repopstring = localStorage.getItem(element);
+        $(extElement).attr("placeholder", repopstring);
+    };      
+};
 var timer = setInterval(function () {
     /*sets Date and time on display*/
     $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
@@ -64,21 +59,35 @@ $(".btn").on("click",function (parms) {
 function saveToJSON() {
     var element = "6am";
     var extElement = "." + element;
+    var arryString ;
     for (let index = 0; index < timeRows.length; index++) {
         element = timeRows[index];
         extElement = "." + element;
         eventSave[index] = $(extElement).val();
+        myJsonString = eventSave.toString();
+        localStorage.setItem(element,$(extElement).val());
+        console.log(element,$(extElement).val());
+        // document.getElementById("demo").innerHTML = fruits.toString();
+        // arryString = eventSave.toString();
     };
     /* saving event arry to localstorage*/
-    myJsonString = JSON.stringify(eventSave);
+    // myJsonString = JSON.stringify(eventSave);
+    // myJsonString = JSON(eventSave);
+//    )
+    // localStorage.setItem("myJsonString",eventSave.toString() );
+    myJsonString = eventSave.toString();
+
 }
 function pullFromJSON() {
-    eventSave =JSON.parse(myJsonString);
+    eventSave =JSON(myJsonString);
+    // eventSave =JSON.parse(myJsonString);
     var element = "6am";
     var extElement = "." + element;
-    for (let index = 0; index < timeRows.length; index++) {
-        element = timeRows[index];
-        extElement = "." + element;
-        eventSave[index] = $(extElement).val();
-    };
+    eventSave = localStorage.getItem("myJsonString");
+    
+    // for (let index = 0; index < timeRows.length; index++) {
+    //     element = timeRows[index];
+    //     extElement = "." + element;
+    //     eventSave[index] = $(extElement).val();
+    // };
 }
