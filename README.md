@@ -7,7 +7,7 @@ You'll need to use the [Moment.js](https://momentjs.com/) library to work with d
 
 This is the home page:
 
-![Home Screenshot](./photo/Workday.png)
+![Home Screenshot](./photo/workday.png)
 
 ## User Story
 
